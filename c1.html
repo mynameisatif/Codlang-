@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codlang</title>
+    <link rel="shortcut icon" type="x-icon" href="logo.png">
+    <style>
+        body {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(white, lightblue);
+        }
+        h1 {
+            font-size: 80px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            text-align: center;
+            color: darkblue;
+        }
+
+        h7 {
+            font-size: 30px;
+            margin: 50px;
+        }
+
+        input[type="text"],
+        button {
+            width: 350px;
+            height: 57px;
+            margin-bottom: 47px;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+            border-radius: 15px;
+            
+        }
+
+        button {
+            cursor: pointer;
+            color: black;
+            background-color: lightblue;
+        }
+
+        button:hover {
+            background-color: gray;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .img {
+            margin-top: -120px;
+            margin-left: 305px;
+        }
+
+        @media (min-width: 450px) {
+            /* Adjust styles for screens wider than 450px */
+            input[type="text"],
+            button {
+                width: 90%;
+                margin: 2%;
+            } 
+            h1{
+                font-size: 600%;
+                position: absolute;
+                text-align: center;
+                left: 40%;
+                top: 10%;
+            }
+            img{
+                margin-top: 30px;
+                margin-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Codlang</h1>
+
+        <label for="edc1"></label>
+        <input type="text" id="edc1" placeholder="Enter text...">
+        
+        <button id="btc2">Convert</button>
+
+        <input type="text" id="edc2" readonly placeholder="Converted text..." style="width: 310px;">
+        
+        <div class="img">
+            <img src="copy.png" alt="Copy icon" id="ImgC" width="62" height="90">
+        </div>
+    </div>
+    <script src="c1.js"></script>
+</body>
+</html>

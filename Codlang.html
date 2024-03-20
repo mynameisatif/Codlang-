@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codlang</title>
+    <link rel="shortcut icon" type="x-icon" href="logo.png">
+    <style>
+        body {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(white, lightblue);
+        }
+        h1 {
+            font-size: 80px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            text-align: center;
+            color: darkblue;
+        }
+
+        button {
+            width: 300px;
+            height: 100px;
+            background-color: lightblue;
+            color: #FFFFFF;
+            font-family: sans-serif-smallcaps;
+            font-size: 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            margin-top: 80px; /* Adjusted for spacing */
+        }
+
+        @media (min-width: 415px) {
+
+            button {
+                width: 90%; /* Adjusted for smaller screens */
+                height: 80px; /* Adjusted for smaller screens */
+                font-size: 24px; /* Adjusted for smaller screens */
+                margin-top: 90px; /* Adjusted for spacing */
+                margin: 05%;
+            }
+            h1{
+                font-size: 600%;
+                position: absolute;
+                text-align: center;
+                left: 40%;
+                top: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div >
+        <h1>Codlang</h1>
+        
+        <button id="bt1">Convert code to normal language</button>
+        
+        <button id="bt2">Convert normal to code language</button>
+    </div>
+
+    <script src="c0.js"></script>
+</body>
+</html>
