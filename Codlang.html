@@ -6,63 +6,249 @@
     <title>Codlang</title>
     <link rel="shortcut icon" type="x-icon" href="logo.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            padding: 30px;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0000ff 0%, #a0beff 50%, #0000ff 100%);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        .main-card {
+            max-width: 672px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 24px;
+        }
+        .input-section {
+            margin-bottom: 24px;
+        }
+        .label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+        .textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .textarea:focus {
+            border-color: #9333ea;
+        }
+        .textarea-readonly {
+            background-color: #f9fafb;
+        }
+        .button-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(white, lightblue);
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-direction: column;
         }
-        h1 {
-            font-size: 80px;
-            line-height: 1.4;
-            margin-bottom: 10px;
-            text-align: center;
-            color: darkblue;
-        }
-
-        button {
-            width: 300px;
-            height: 100px;
-            background-color: lightblue;
-            color: #FFFFFF;
-            font-family: sans-serif-smallcaps;
-            font-size: 30px;
+        .button {
+            flex: 1;
+            padding: 12px 24px;
             border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            border-radius: 15px;
-            margin-top: 80px; /* Adjusted for spacing */
+            transition: all 0.2s;
+            color: white;
         }
-
-        @media (min-width: 415px) {
-
-            button {
-                width: 90%; /* Adjusted for smaller screens */
-                height: 80px; /* Adjusted for smaller screens */
-                font-size: 24px; /* Adjusted for smaller screens */
-                margin-top: 90px; /* Adjusted for spacing */
-                margin: 05%;
+        .button-encrypt {
+            background-color: #9333ea;
+        }
+        .button-encrypt:hover {
+            background-color: #7c3aed;
+        }
+        .button-decrypt {
+            background-color: #4f46e5;
+        }
+        .button-decrypt:hover {
+            background-color: #4338ca;
+        }
+        .button-copy {
+            background-color: #059669;
+            padding: 8px 16px;
+            width: 100%;
+        }
+        .button-copy:hover {
+            background-color: #047857;
+        }
+        .result-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        @media (min-width: 640px) {
+            .container {
+                padding: 32px 24px;
             }
-            h1{
-                font-size: 600%;
-                position: absolute;
-                text-align: center;
-                left: 40%;
-                top: 10%;
+            .main-card {
+                border-radius: 24px;
+                padding: 32px;
+            }
+            .input-section {
+                margin-bottom: 32px;
+            }
+            .label {
+                font-size: 18px;
+                margin-bottom: 16px;
+            }
+            .textarea {
+                padding: 16px;
+                border-radius: 16px;
+                font-size: 16px;
+            }
+            .button-container {
+                flex-direction: row;
+                gap: 16px;
+                margin-bottom: 32px;
+            }
+            .button {
+                padding: 12px 24px;
+                border-radius: 16px;
+                font-size: 16px;
+            }
+            .button-copy {
+                width: auto;
+            }
+            .result-header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0;
+                margin-bottom: 16px;
             }
         }
     </style>
 </head>
-<body>
-    <div >
-        <h1>Codlang</h1></h1>
-        
-        <button id="bt1">Convert code to normal language</button>
-        
-        <button id="bt2">Convert normal to code language</button>
+<body class="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700">
+    <div class="container">
+        <div class="main-card">
+            <div class="input-section">
+                <label for="inputText" class="label">Enter text:</label>
+                <textarea 
+                    id="inputText" 
+                    placeholder="Type your message here..."
+                    class="textarea"
+                    rows="3"
+                ></textarea>
+            </div>
+            <div class="button-container">
+                <button 
+                    onclick="encryptText()" 
+                    class="button button-encrypt"
+                >
+                    Code words
+                </button>
+                <button 
+                    onclick="decryptText()" 
+                    class="button button-decrypt"
+                >
+                    Tap to Decode
+                </button>
+            </div>
+            <div>
+                
+                <textarea 
+                    id="outputText" 
+                    placeholder="Your Coded text will appear here..."
+                    class="textarea textarea-readonly"
+                    rows="3"
+                    readonly
+                ></textarea>
+            </div>
+            <div class="result-header">
+                    <button 
+                        onclick="copyResult()" 
+                        class="button button-copy"
+                        id="copyBtn"
+                    >
+                        Copy Result
+                    </button>
+                </div>
+        </div>
     </div>
+    <script>
+        function encryptText() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter some text to encrypt!');
+                return;
+            }
+            const encrypted = caesarCipher(input, 13);
+            document.getElementById('outputText').value = encrypted;
+        }
 
-    <script src="c0.js"></script>
+        function decryptText() {
+            const input = document.getElementById('inputText').value;
+            if (!input.trim()) {
+                alert('Please enter some text to decrypt!');
+                return;
+            }
+            const decrypted = caesarCipher(input, 13);
+            document.getElementById('outputText').value = decrypted;
+        }
+
+        function caesarCipher(text, shift) {
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const code = char.charCodeAt(0);
+                    const isUpperCase = code >= 65 && code <= 90;
+                    const base = isUpperCase ? 65 : 97;
+                    return String.fromCharCode(((code - base + shift) % 26) + base);
+                } else if (char.match(/[0-9]/)) {
+                    return String.fromCharCode(((char.charCodeAt(0) - 48 + 5) % 10) + 48);
+                } else {
+                    return char;
+                }
+            }).join('');
+        }
+
+        function copyResult() {
+            const outputText = document.getElementById('outputText');
+            if (!outputText.value.trim()) {
+                alert('No result to copy!');
+                return;
+            }
+            outputText.select();
+            document.execCommand('copy');
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = 'Copied!';
+            copyBtn.classList.add('bg-green-700');
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.classList.remove('bg-green-700');
+            }, 2000);
+        }
+
+        document.getElementById('inputText').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                encryptText();
+            }
+        });
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978424ac201bff6f',t:'MTc1NjcyMzE2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
